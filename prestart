@@ -1,0 +1,22 @@
+#!/bin/bash -e
+
+## Tell the user what's going on
+echo -n 'Generating final js files... '
+
+## Put client /server js partials into final deploy file
+for JS_PREFIX in $(find shared -name "*.js.src" -print0 | xargs -0 printf "%s\n" | sed -e 's#shared/\(.*\)\.js\.src#\1#g')
+do
+    ## client first
+    CLIENT_GENERATED_FILE=client/$JS_PREFIX.generated.js
+    cat shared/$JS_PREFIX.js.src > $CLIENT_GENERATED_FILE
+    echo >> $CLIENT_GENERATED_FILE
+    cat client/$JS_PREFIX.js.partial >> $CLIENT_GENERATED_FILE
+
+    ## then server
+    SERVER_GENERATED_FILE=server/$JS_PREFIX.generated.js
+    cat shared/$JS_PREFIX.js.src > $SERVER_GENERATED_FILE
+    echo >> $CLIENT_GENERATED_FILE
+    cat server/$JS_PREFIX.js.partial >> $SERVER_GENERATED_FILE
+done
+
+echo 'done'

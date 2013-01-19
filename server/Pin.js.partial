@@ -1,0 +1,21 @@
+/* --- SETTERS --- */
+
+Pin.prototype.setUsername = function (username) {
+    this.username = username;
+};
+Pin.prototype.setColor = function (color) {
+    this.color = color;
+};
+Pin.prototype.setSocket = function (socket) {
+    this.socket = socket;
+};
+
+/* --- COLLECTION MANIPULATORS --- */
+
+Pin.prototype.addComment = function (comment) {
+    console.log('yo');
+};
+
+/* --- EXPORT THE OBJECT --- */
+
+exports.Pin = Pin;

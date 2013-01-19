@@ -1,0 +1,30 @@
+Pin = function () {
+    this.comments = [];
+    this.diagEngPoints = {
+        upper: [0,0],
+        lower: [1,1]
+    };
+    this.user = undefined;
+};
+
+/* --- ACCESSORS --- */
+
+Pin.prototype.getUser = function () {
+    return this.user;
+};
+
+/**
+ * @return Object<(upper|lower), Array<Number>> - a 2-element object representing the (x,y)
+ *                                                coordinates of the upper and lower endpoints of
+ *                                                the Pin's associated selector rectangle
+ */
+Pin.prototype.getDiagEndpoints = function () {
+    return this.diagEndpoints;
+};
+
+/**
+ * @return Array<Comment> - the set of comments that have been posted against this pin
+ */
+Pin.prototype.getComments = function () {
+    return this.comments;
+};

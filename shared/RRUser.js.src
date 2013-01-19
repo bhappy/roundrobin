@@ -1,0 +1,13 @@
+RRUser = function () {};
+
+/* --- ACCESSORS --- */
+
+RRUser.prototype.getUsername = function () {
+    return this.username;
+};
+RRUser.prototype.getColor = function () {
+    return this.color;
+};
+RRUser.prototype.getSocket = function () {
+    return this.socket;
+};
