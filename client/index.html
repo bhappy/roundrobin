@@ -4,48 +4,49 @@
 <head>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js" type="text/javascript">
     </script>
-    <script src="/PinItUser.js" type="text/javascript"></script>
+    <script src="/Pin.js" type="text/javascript"></script>
+    <script src="/RRUser.js" type="text/javascript"></script>
     <script type="text/javascript">
-        PinIt = {
+        RR = {
             getValidatedSocket: function () {
-                var socket = PinIt.getSocket();
+                var socket = RR.getSocket();
                 if (typeof socket === 'undefined') {
-                    throw new Error('PinIt.getValidatedSocket(): no socket defined for PinIt.');
+                    throw new Error('RR.getValidatedSocket(): no socket defined for RR.');
                 }
                 return socket;
             },
             sendUsername: function (name) {
-                var socket = PinIt.getValidatedSocket();
+                var socket = RR.getValidatedSocket();
                 socket.emit('set username', { username: name });
             },
             getSocket: function () {
-                return PinIt.socket;
+                return RR.socket;
             },
             setSocket: function (socket) {
-                PinIt.socket = socket;
+                RR.socket = socket;
             },
             getUser: function () {
-                return PinIt.user;
+                return RR.user;
             },
             setUser: function (user) {
-                PinIt.user = user;
+                RR.user = user;
             },
-            user: new PinItUser()
+            user: new RRUser()
         };
     </script>
     <script src="/socket.io/socket.io.js"></script>
     <script type="text/javascript">
         $(document).ready(function () {
             var socket = io.connect('http://localhost:1337');
-            PinIt.setSocket(socket);
+            RR.setSocket(socket);
             socket.on('colors with threads', function (data) {
                 $('body').append(data);
             });
-            socket.on('user update', function (pinitUser) {
-                PinIt.setUser(pinitUser);
+            socket.on('user update', function (user) {
+                RR.setUser(user);
             });
             $('#sendName').on('click', function () {
-                PinIt.sendUsername($('#nameToSend').val());
+                RR.sendUsername($('#nameToSend').val());
             });
         });
     </script>

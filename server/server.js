@@ -5,7 +5,8 @@ var fs        = require('fs');
 var url       = require('url');
 var io        = require('socket.io');
 var colors    = require('./colors');
-var PinItUser = require('../shared/PinItUser').PinItUser;
+var RRUser    = require('./RRUser.generated').RRUser;
+var Pin       = require('./Pin.generated').Pin;
 var _         = require('underscore');
 
 /* --- SETUP STATIC DATA --- */
@@ -30,8 +31,11 @@ var app = http.createServer(function (req, res) {
         res.end();
     };
     switch (path) {
-        case '/PinItUser.js':
-            fs.readFile(__dirname + '/../shared/PinItUser.js', fsCallback);
+        case '/Pin.js':
+            fs.readFile(__dirname + '/../client/Pin.generated.js', fsCallback);
+        break;
+        case '/RRUser.js':
+            fs.readFile(__dirname + '/../client/RRUser.generated.js', fsCallback);
         break;
         default:
             fs.readFile(__dirname + '/../client/index.html', fsCallback);
@@ -44,7 +48,7 @@ var app = http.createServer(function (req, res) {
 io = io.listen(app);
 io.sockets.on('connection', function (socket) {
     socket.pinit = { 
-        user: new PinItUser()
+        user: new RRUser()
     };
     socket.pinit.user.setColor(colors[userCnt % 20]);
     userCnt++;
