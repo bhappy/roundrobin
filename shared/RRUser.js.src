@@ -1,13 +1,22 @@
-RRUser = function () {};
+RRUser = function (config) {
+    this.color = config.color;
+    this.name  = config.name;
+};
 
 /* --- ACCESSORS --- */
 
-RRUser.prototype.getUsername = function () {
-    return this.username;
+RRUser.prototype.getName = function () {
+    return this.name;
 };
 RRUser.prototype.getColor = function () {
     return this.color;
 };
-RRUser.prototype.getSocket = function () {
-    return this.socket;
+
+/* --- SETTERS --- */
+
+RRUser.prototype.setName = function (name) {
+    this.name = name;
+};
+RRUser.prototype.setColor = function (color) {
+    this.color = color;
 };

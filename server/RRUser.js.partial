@@ -1,15 +1,3 @@
-/* --- SETTERS --- */
-
-RRUser.prototype.setUsername = function (username) {
-    this.username = username;
-};
-RRUser.prototype.setColor = function (color) {
-    this.color = color;
-};
-RRUser.prototype.setSocket = function (socket) {
-    this.socket = socket;
-};
-
 /* --- EXPORT --- */
 
 exports.RRUser = RRUser;

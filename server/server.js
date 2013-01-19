@@ -4,7 +4,7 @@ var http      = require('http');
 var fs        = require('fs');
 var url       = require('url');
 var io        = require('socket.io');
-var colors    = require('./colors');
+var colors    = require('./colors').colors;
 var RRUser    = require('./RRUser.generated').RRUser;
 var Pin       = require('./Pin.generated').Pin;
 var _         = require('underscore');
@@ -31,6 +31,9 @@ var app = http.createServer(function (req, res) {
         res.end();
     };
     switch (path) {
+        case '/main.js':
+            fs.readFile(__dirname + '/../client/main.js', fsCallback);
+        break;
         case '/Pin.js':
             fs.readFile(__dirname + '/../client/Pin.generated.js', fsCallback);
         break;
@@ -47,15 +50,15 @@ var app = http.createServer(function (req, res) {
 
 io = io.listen(app);
 io.sockets.on('connection', function (socket) {
-    socket.pinit = { 
-        user: new RRUser()
+    socket.RR = { 
+        user: new RRUser({ name: 'anonymous', color: colors[userCnt % 20] })
     };
-    socket.pinit.user.setColor(colors[userCnt % 20]);
     userCnt++;
     socket.emit('colors with threads', _.keys(colorsWithThreads));
-    socket.on('set username', function (data) {
-        socket.pinit.user.setUsername(data.username);
-        socket.emit('user update', socket.pinit.user);
+    socket.on('update user', function (config) {
+        if (config.name)  socket.RR.user.setName(config.name);
+        if (config.color) socket.RR.user.setColor(config.color);
+        socket.emit('update user', socket.RR.user);
     });
 });
 

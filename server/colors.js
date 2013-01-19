@@ -1,4 +1,4 @@
-exports = [
+exports.colors = [
     'black',
     'blue',
     'red',

@@ -1,13 +1,5 @@
 /* --- SENDERS --- */
 
-RRUser.prototype.sendUsername = function (username) {
-    this.username = username;
-};
-
-RRUser.prototype.sendColor = function (color) {
-    this.color = color;
-};
-
-RRUser.prototype.sendSocket = function (socket) {
-    this.socket = socket;
+RRUser.prototype.sendUpdate = function (updateConfig) {
+    RR.socket.emit('update user', updateConfig);
 };

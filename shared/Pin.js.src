@@ -1,10 +1,10 @@
-Pin = function () {
+Pin = function (config) {
     this.comments = [];
     this.diagEngPoints = {
         upper: [0,0],
         lower: [1,1]
     };
-    this.user = undefined;
+    this.user = config.user;
 };
 
 /* --- ACCESSORS --- */
@@ -27,4 +27,15 @@ Pin.prototype.getDiagEndpoints = function () {
  */
 Pin.prototype.getComments = function () {
     return this.comments;
+};
+
+/* --- SETTERS --- */
+
+Pin.prototype.setUser = function (user) {
+    this.user = user;
+};
+
+Pin.prototype.setDiagEndpoints = function (upper, lower) {
+    this.diagEndpoints.upper = upper;
+    this.diagEndpoints.lower = lower;
 };
