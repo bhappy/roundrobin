@@ -1,0 +1,29 @@
+{
+    "name":         "roundrobin",
+    "version":      "0.0.1",
+    "contributors": [{
+        "name": "Ada Yu"
+    },{
+        "name":  "Ryan Self",
+        "email": "stephen.ryan.self@gmail.com"
+    }],
+    "keywords": [
+        "realtime collaboration",
+        "pin",
+        "comment thread"
+    ],
+    "repository": {
+        "type": "git",
+        "url":  "https://github.com/bhappy/roundrobin.git"
+    },
+    "engines": {
+        "node": ">=0.6"
+    },
+    "dependencies": {
+        "socket.io":  "0.9.13",
+        "underscore": "1.4.3"
+    },
+    "scripts": {
+        "start": "node server/server.js"
+    }
+}
