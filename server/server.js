@@ -48,8 +48,7 @@ io.sockets.on('connection', function (socket) {
     };
     socket.pinit.user.setColor(colors[userCnt % 20]);
     userCnt++;
-    //_.keys(
-    socket.emit('colors with threads', [ 'red', 'green' ]);
+    socket.emit('colors with threads', _.keys(colorsWithThreads));
     socket.on('set username', function (data) {
         socket.pinit.user.setUsername(data.username);
         socket.emit('user update', socket.pinit.user);
