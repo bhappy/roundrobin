@@ -75,6 +75,7 @@ io.sockets.on('connection', function (socket) {
             },
             user:  socket.RR.user
         }));
+        pin.setId();
         pinMap[pin.getId()] = pin;
         io.sockets.emit('new pin', {
             pin:  {
@@ -90,9 +91,12 @@ io.sockets.on('connection', function (socket) {
             text: config.text,
             user: socket.RR.user
         }));
+        comment.setId();
         commentMap[comment.getId()] = comment;
         io.sockets.emit('new comment', {
-            comment: comment,
+            comment: {
+                id: comment.getId()
+            },
             pin: comment.getPin().getId()
         });
     });
