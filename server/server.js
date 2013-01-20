@@ -117,13 +117,14 @@ io.sockets.on('connection', function (socket) {
     });
     _.each(_.keys(commentMap), function (commentId) {
         var comment = commentMap[commentId];
+        console.log('comment: ', comment);
         socket.emit('new comment', {
             comment: {
                 id:   comment.getId(),
                 text: comment.getText()
             },
-            pin: comment.getPin().getId(),
-            user: comment.getPin().getUser().getColor()
+            pin:  comment.getPin().getId(),
+            user: comment.getUser().getColor()
         });
     });
 });
