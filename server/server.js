@@ -25,6 +25,7 @@ var app = http.createServer(function (req, res) {
         if (error) {
             res.writeHead(500);
             res.end("Error loading file");
+            return;
         }
         res.writeHead(200);
         res.write(data);
@@ -50,7 +51,7 @@ var app = http.createServer(function (req, res) {
 
 io = io.listen(app);
 io.sockets.on('connection', function (socket) {
-    socket.RR = { 
+    socket.RR = {
         user: new RRUser({ name: 'anonymous', color: colors[userCnt % 20] })
     };
     userCnt++;
