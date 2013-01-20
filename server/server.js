@@ -102,6 +102,27 @@ io.sockets.on('connection', function (socket) {
             user: socket.RR.user.getColor()
         });
     });
+    _.each(_.keys(pinMap), function (pinId) {
+        var pin = pinMap[pinId];
+        socket.emit('new pin', {
+            pin: {
+                id: pin.getId(),
+                diagEndpoints: pin.getDiagEndpoints()
+            },
+            user: pin.getUser().getColor()
+        });
+    });
+    _.each(_.keys(commentMap), function (commentId) {
+        var comment = commentMap[commentId];
+        socket.emit('new comment', {
+            comment: {
+                id:   comment.getId(),
+                text: comment.getText()
+            },
+            pin: comment.getPin().getId(),
+            user: comment.getPin().getUser().getColor()
+        });
+    });
 });
 
 /* --- GIVE INITIAL INDICATION OF SERVER RUNNING --- */
