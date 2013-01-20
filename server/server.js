@@ -87,7 +87,7 @@ io.sockets.on('connection', function (socket) {
     });
     socket.on('new comment', function (config) {
         var comment = pinMap[config.pin].addComment(new RRComment({
-            pin:  pins[config.pin],
+            pin:  pinMap[config.pin],
             text: config.text,
             user: socket.RR.user
         }));
@@ -95,9 +95,11 @@ io.sockets.on('connection', function (socket) {
         commentMap[comment.getId()] = comment;
         io.sockets.emit('new comment', {
             comment: {
-                id: comment.getId()
+                id:   comment.getId(),
+                text: comment.getText()
             },
-            pin: comment.getPin().getId()
+            pin: comment.getPin().getId(),
+            user: socket.RR.user.getColor()
         });
     });
 });

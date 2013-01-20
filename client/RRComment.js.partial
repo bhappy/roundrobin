@@ -1,5 +1,5 @@
 /* --- SENDERS --- */
 
-RRComment.prototype.sendUpdate = function (config) {
-    RR.socket.emit('update comment', config);
+RRComment.sendNew = function (config) {
+    RR.socket.emit('new comment', config);
 };

@@ -16,6 +16,9 @@ RRComment.prototype.getPin = function () {
 RRComment.prototype.getText = function () {
     return this.text;
 };
+RRComment.prototype.getId = function () {
+    return this.id;
+};
 
 /* --- SETTERS --- */
 
