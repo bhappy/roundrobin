@@ -18,5 +18,10 @@ do
     echo >> $SERVER_GENERATED_FILE
     cat server/$JS_PREFIX.js.partial >> $SERVER_GENERATED_FILE
 done
+echo 'done'
 
+## Generate the pre-compiled templates client-side file
+echo -n 'Generating pre-compiled client-side templates file... '
+CLIENT_TEMPLATE_GENERATED_FILE='client/templates.generated.js'
+find client/templates -name "*.handlebars" -print0 | xargs -0 ./handlebars -f $CLIENT_TEMPLATE_GENERATED_FILE
 echo 'done'

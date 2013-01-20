@@ -20,6 +20,7 @@
         "node": ">=0.6"
     },
     "dependencies": {
+        "handlebars": "1.0.8",
         "socket.io":  "0.9.13",
         "underscore": "1.4.3"
     },

@@ -47,6 +47,9 @@ var app = http.createServer(function (req, res) {
         case '/RRUser.js':
             fs.readFile(__dirname + '/../client/RRUser.generated.js', fsCallback);
         break;
+        case '/templates.js':
+            fs.readFile(__dirname + '/../client/templates.generated.js', fsCallback);
+        break;
         default:
             fs.readFile(__dirname + '/../client/index.html', fsCallback);
         break;
