@@ -1,0 +1,21 @@
+/* --- COLLECTION MANIPULATORS --- */
+
+RRPin.prototype.addComment = function (comment) {
+    this.commentList.push(comment);
+    this.commentMap[comment.id] = comment;;
+    return comment;
+};
+
+/* --- ID HANDLING --- */
+
+RRPin.prototype.setId = (function () {
+    var idCnt = 0;
+    return function () {
+        this.id = idCnt;
+        idCnt++;
+    };
+}());
+
+/* --- EXPORT THE OBJECT --- */
+
+exports.RRPin = RRPin;

@@ -1,3 +1,11 @@
+/* --- COLLECTION MANIPULATION --- */
+
+RRUser.prototype.addPin = function (pin) {
+    this.pinList.push(pin);
+    this.pinMap[pin.id] = pin;
+    return pin;
+};
+
 /* --- EXPORT --- */
 
 exports.RRUser = RRUser;

@@ -1,9 +1,0 @@
-/* --- COLLECTION MANIPULATORS --- */
-
-Pin.prototype.addComment = function (comment) {
-    console.log('yo');
-};
-
-/* --- EXPORT THE OBJECT --- */
-
-exports.Pin = Pin;

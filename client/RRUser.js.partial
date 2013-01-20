@@ -1,5 +1,5 @@
 /* --- SENDERS --- */
 
-RRUser.prototype.sendUpdate = function (updateConfig) {
+RRUser.sendUpdate = function (updateConfig) {
     RR.socket.emit('update user', updateConfig);
 };

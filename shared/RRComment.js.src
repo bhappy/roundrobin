@@ -1,0 +1,30 @@
+RRComment = function (config) {
+    this.user = config.user;
+    this.pin  = config.pin;
+    this.text = config.text;
+    if (config.id) this.id = config.id;
+};
+
+/* --- ACCESSORS --- */
+
+RRComment.prototype.getUser = function () {
+    return this.user;
+};
+RRComment.prototype.getPin = function () {
+    return this.pin;
+};
+RRComment.prototype.getText = function () {
+    return this.text;
+};
+
+/* --- SETTERS --- */
+
+RRComment.prototype.setUser = function (user) {
+    return this.user;
+};
+RRComment.prototype.setPin = function (pin) {
+    return this.pin;
+};
+RRComment.prototype.setText = function (text) {
+    return this.text;
+};

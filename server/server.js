@@ -6,7 +6,8 @@ var url       = require('url');
 var io        = require('socket.io');
 var colors    = require('./colors').colors;
 var RRUser    = require('./RRUser.generated').RRUser;
-var Pin       = require('./Pin.generated').Pin;
+var Pin       = require('./RRPin.generated').Pin;
+var Comment   = require('./RRComment.generated').Pin;
 var _         = require('underscore');
 
 /* --- SETUP STATIC DATA --- */
@@ -16,6 +17,8 @@ var _         = require('underscore');
 
 var userCnt = 0;
 var colorsWithThreads = {};
+var commentMap = {};
+var pinMap = {};
 
 /* --- SETUP MAIN SERVER --- */
 
@@ -35,8 +38,11 @@ var app = http.createServer(function (req, res) {
         case '/main.js':
             fs.readFile(__dirname + '/../client/main.js', fsCallback);
         break;
-        case '/Pin.js':
-            fs.readFile(__dirname + '/../client/Pin.generated.js', fsCallback);
+        case '/RRComment.js':
+            fs.readFile(__dirname + '/../client/RRComment.generated.js', fsCallback);
+        break;
+        case '/RRPin.js':
+            fs.readFile(__dirname + '/../client/RRPin.generated.js', fsCallback);
         break;
         case '/RRUser.js':
             fs.readFile(__dirname + '/../client/RRUser.generated.js', fsCallback);
@@ -60,6 +66,35 @@ io.sockets.on('connection', function (socket) {
         if (config.name)  socket.RR.user.setName(config.name);
         if (config.color) socket.RR.user.setColor(config.color);
         socket.emit('update user', socket.RR.user);
+    });
+    socket.on('new pin', function (config) {
+        var pin = socket.RR.user.addPin(new RRPin({
+            diagEndpoints: {
+                lower: config.lower,
+                upper: config.upper
+            },
+            user:  socket.RR.user
+        }));
+        pinMap[pin.getId()] = pin;
+        io.sockets.emit('new pin', {
+            pin:  {
+                id: pin.getId(),
+                diagEndpoints: pin.getDiagEndpoints()
+            },
+            user: socket.RR.user.getColor()
+        });
+    });
+    socket.on('new comment', function (config) {
+        var comment = pinMap[config.pin].addComment(new RRComment({
+            pin:  pins[config.pin],
+            text: config.text,
+            user: socket.RR.user
+        }));
+        commentMap[comment.getId()] = comment;
+        io.sockets.emit('new comment', {
+            comment: comment,
+            pin: comment.getPin().getId()
+        });
     });
 });
 

@@ -1,0 +1,63 @@
+RRPin = function (config) {
+    var diagEndpoints = config.diagEndpoints;
+    var upper = (diagEndpoints && diagEndpoints.upper) ? diagEndpoints.upper : [0,0];
+    var lower = (diagEndpoints && diagEndpoints.lower) ? diagEndpoints.lower : [1,1];
+    this.diagEndpoints = {
+        upper: upper,
+        lower: lower
+    };
+    this.commentList = [];
+    this.commentMap = {};
+    this.user = config.user;
+    if (config.id) this.id = config.id;
+};
+
+/* --- ACCESSORS --- */
+
+RRPin.prototype.getUser = function () {
+    return this.user;
+};
+
+RRPin.prototype.getId = function () {
+    return this.id;
+};
+
+/**
+ * @return Object<(upper|lower), Array<Number>> - a 2-element object representing the (x,y)
+ *                                                coordinates of the upper and lower endpoints of
+ *                                                the RRPin's associated selector rectangle
+ */
+RRPin.prototype.getDiagEndpoints = function () {
+    return this.diagEndpoints;
+};
+
+/**
+ * @return Array<Comment> - the set of comments that have been posted against this pin
+ */
+RRPin.prototype.getComments = function () {
+    return this.commentList;
+};
+
+/**
+ * @return Comment
+ */
+RRPin.prototype.getComment = function (id) {
+    return this.commentMap[id];
+};
+
+/* --- SETTERS --- */
+
+RRPin.prototype.setUser = function (user) {
+    this.user = user;
+};
+
+RRPin.prototype.setDiagEndpoints = function (upper, lower) {
+    this.diagEndpoints.upper = upper;
+    this.diagEndpoints.lower = lower;
+};
+
+/* --- CHECKERS --- */
+
+RRPin.prototype.hasComment = function (id) {
+    return (this.commentMap[id] instanceof RRComment);
+};

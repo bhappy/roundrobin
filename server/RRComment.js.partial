@@ -1,0 +1,13 @@
+/* --- ID HANDLING --- */
+
+RRComment.prototype.setId = (function () {
+    var idCnt = 0;
+    return function () {
+        this.id = idCnt;
+        idCnt++;
+    };
+}());
+
+/* --- EXPORT --- */
+
+exports.RRComment = RRComment;

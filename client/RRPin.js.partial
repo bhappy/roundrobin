@@ -1,0 +1,5 @@
+/* --- SENDERS --- */
+
+RRPin.sendNew = function (newConfig) {
+    RR.socket.emit('new pin', newConfig);
+};

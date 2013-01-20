@@ -1,6 +1,8 @@
 RRUser = function (config) {
     this.color = config.color;
     this.name  = config.name;
+    this.pinList = [];
+    this.pinMap = {};
 };
 
 /* --- ACCESSORS --- */
@@ -10,6 +12,12 @@ RRUser.prototype.getName = function () {
 };
 RRUser.prototype.getColor = function () {
     return this.color;
+};
+RRUser.prototype.getPin = function (id) {
+    return this.pinMap[id];
+};
+RRUser.prototype.getPins = function () {
+    return this.pinList;
 };
 
 /* --- SETTERS --- */
