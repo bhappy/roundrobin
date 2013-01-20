@@ -1,1 +1,11 @@
-<div id="pin_{{pin}}"></div>
+<div id="pin_{{pin.id}}" class="pin">
+    <span style="color:{{user.color}};">
+        ({{pin.upper.[0]}},{{pin.upper.[1]}}) ({{pin.lower.[0]}},{{pin.lower.[1]}})
+    </span><br/>
+    <form id="commentInputForm_{{pin.id}}">
+        <label for="commentInput">Add comment:</label>
+        <input id="commentInput_{{pin.id}}" class="commentInput" name="commentInput" type="text" />
+        <input id="commentInputButton_{{pin.id}}" class="commentInputButton" type="button" 
+               value="send comment" />
+    </form>
+</div>

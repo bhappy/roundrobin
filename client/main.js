@@ -21,13 +21,11 @@ $(document).ready(function () {
         pin = RR.pinMap[pinId] = new RRPin(config.pin);
         upper = pin.getDiagEndpoints().upper;
         lower = pin.getDiagEndpoints().lower;
-        $('#pins').append('<div id="pin_' + pinId + '" class="pin"><span style="color: ' + color +
-                ';">(' + upper[0] + ',' + upper[1] + ') (' + lower[0] + ',' + lower[1] + 
-                ')</span><br/><input id="commentInput_' + pinId + '" class="commentInput" ' +
-                'type="text">' + 'Comment</input><br/>' +
-                '<button id="inputComment_' + pinId + '" class="commentInputButton">send comment' +
-                '</button></div>');
-        $('#pin_' + pinId + ' .commentInputButton').on('click', (function (id) {
+        $('#pins').append(Handlebars.templates['pin']({
+            pin:  { id: pinId, lower: lower, upper: upper },
+            user: { color: color }
+        }));
+        $('#commentInputButton_' + pinId).on('click', (function (id) {
             return function () {
                 RRComment.sendNew({
                     pin: id,
@@ -43,8 +41,10 @@ $(document).ready(function () {
         var color = config.user;
         commentText = config.comment.text;
         comment = RR.commentMap[commentId] = new RRComment(config.comment);
-        $('#commentInput_' + pinId).before('<span id="comment_' + commentId + '" class="comment" ' +
-                'style="color: ' + color + ';">' + commentText + '</span><br/>');
+        $('#commentInputForm_' + pinId).before(Handlebars.templates['comment']({
+            comment: { id: commentId, text: commentText },
+            user: { color: color }
+        }));
     });
     $('#sendName').on('click', function () {
         RRUser.sendUpdate({ name: $('#nameToSend').val() });
