@@ -1,0 +1,4 @@
+#body {
+    -moz-box-orient:horizontal;
+    -webkit-box-orient:horizontal;
+}

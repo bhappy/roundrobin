@@ -35,8 +35,14 @@ var app = http.createServer(function (req, res) {
         res.end();
     };
     switch (path) {
+        case '/app.css':
+            fs.readFile(__dirname + '/../client/main.css', fsCallback);
+        break;
         case '/main.js':
             fs.readFile(__dirname + '/../client/main.js', fsCallback);
+        break;
+        case '/protoImage.png':
+            fs.readFile(__dirname + '/../client/about_nyu.png', fsCallback);
         break;
         case '/RRComment.js':
             fs.readFile(__dirname + '/../client/RRComment.generated.js', fsCallback);
