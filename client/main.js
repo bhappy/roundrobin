@@ -23,7 +23,7 @@ $(document).ready(function () {
         pin = RR.pinMap[pinId] = new RRPin(config.pin);
         upper = pin.getDiagEndpoints().upper;
         lower = pin.getDiagEndpoints().lower;
-        $('#pinList').append(Handlebars.templates['pin']({
+        $('#selectArea').append(Handlebars.templates['pin']({
             pin:  { id: pinId, lower: lower, upper: upper },
             user: { color: color }
         }));
@@ -51,7 +51,7 @@ $(document).ready(function () {
         var color = config.user;
         commentText = config.comment.text;
         comment = RR.commentMap[commentId] = new RRComment(config.comment);
-        $('#commentInputForm_' + pinId).before(Handlebars.templates['comment']({
+        $('#pinBody_' + pinId).append(Handlebars.templates['comment']({
             comment: { id: commentId, text: commentText },
             user: { color: color }
         }));

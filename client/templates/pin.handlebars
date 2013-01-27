@@ -1,11 +1,18 @@
-<div id="pin_{{pin.id}}" class="pin">
-    <span style="color:{{user.color}};">
-        ({{pin.upper.[0]}},{{pin.upper.[1]}}) ({{pin.lower.[0]}},{{pin.lower.[1]}})
-    </span><br/>
-    <form id="commentInputForm_{{pin.id}}">
-        <label for="commentInput">Add comment:</label>
-        <input id="commentInput_{{pin.id}}" class="commentInput" name="commentInput" type="text" />
-        <input id="commentInputButton_{{pin.id}}" class="commentInputButton" type="button" 
+<div id="pin_{{pin.id}}" class="pin" style="left:{{pin.upper.[0]}}px; top:{{pin.upper.[1]}}px; width:{{pin.lower.[0]-pin.upper.[0]}}px;">
+    <header id="pinHeader_{{pin.id}}" class="pinHeader">
+        <span style="color:{{user.color}};">
+            ({{pin.upper.[0]}},{{pin.upper.[1]}}) ({{pin.lower.[0]}},{{pin.lower.[1]}})
+        </span>
+    </header>
+    <div id="pinBody_{{pin.id}}" class="pinBody">
+    </div>
+    <footer id="pinFooter_{{pin.id}}" class="pinFooter">
+        <form id="commentInputForm_{{pin.id}}" class="commentInputForm">
+            <label for="commentInput">Add comment:</label>
+            <input id="commentInput_{{pin.id}}" class="commentInput" name="commentInput" 
+                   type="text" />
+            <input id="commentInputButton_{{pin.id}}" class="commentInputButton" type="button" 
                value="send comment" />
-    </form>
+        </form>
+    </footer>
 </div>
