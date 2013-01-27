@@ -1,10 +1,14 @@
 RRPin = function (config) {
-    var diagEndpoints = config.diagEndpoints;
-    var upper = (diagEndpoints && diagEndpoints.upper) ? diagEndpoints.upper : [0,0];
-    var lower = (diagEndpoints && diagEndpoints.lower) ? diagEndpoints.lower : [1,1];
-    this.diagEndpoints = {
-        upper: upper,
-        lower: lower
+    var geometry = config.geometry;
+    var left    = (geometry && geometry.left)    ? geometry.left    : 0;
+    var top     = (geometry && geometry.top)     ? geometry.top     : 0;
+    var height  = (geometry && geometry.height)  ? geometry.height  : 200;
+    var width   = (geometry && geometry.width)   ? geometry.width   : 200;
+    this.geometry = {
+        left:   left,
+        top:    top,
+        height: height,
+        width:  width
     };
     this.commentList = [];
     this.commentMap = {};
@@ -23,12 +27,11 @@ RRPin.prototype.getId = function () {
 };
 
 /**
- * @return Object<(upper|lower), Array<Number>> - a 2-element object representing the (x,y)
- *                                                coordinates of the upper and lower endpoints of
- *                                                the RRPin's associated selector rectangle
+ * @return Object<{left, top, height, width), Number> - a 4-element object representing the 
+ *                                                      various geometry properties of the RRPin
  */
-RRPin.prototype.getDiagEndpoints = function () {
-    return this.diagEndpoints;
+RRPin.prototype.getGeometry = function () {
+    return this.geometry;
 };
 
 /**
@@ -51,9 +54,11 @@ RRPin.prototype.setUser = function (user) {
     this.user = user;
 };
 
-RRPin.prototype.setDiagEndpoints = function (upper, lower) {
-    this.diagEndpoints.upper = upper;
-    this.diagEndpoints.lower = lower;
+RRPin.prototype.setGeometry = function (left, top, height, width) {
+    this.geometry.left   = left;
+    this.geometry.top    = top;
+    this.geometry.height = height;
+    this.geometry.width  = width; 
 };
 
 /* --- CHECKERS --- */

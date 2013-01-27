@@ -78,9 +78,11 @@ io.sockets.on('connection', function (socket) {
     });
     socket.on('new pin', function (config) {
         var pin = socket.RR.user.addPin(new RRPin({
-            diagEndpoints: {
-                lower: config.lower,
-                upper: config.upper
+            geometry: {
+                left:   config.left,
+                top:    config.top,
+                height: config.height,
+                width:  config.width
             },
             user:  socket.RR.user
         }));
@@ -89,7 +91,7 @@ io.sockets.on('connection', function (socket) {
         io.sockets.emit('new pin', {
             pin:  {
                 id: pin.getId(),
-                diagEndpoints: pin.getDiagEndpoints()
+                geometry: pin.getGeometry()
             },
             user: socket.RR.user.getColor()
         });
@@ -116,7 +118,7 @@ io.sockets.on('connection', function (socket) {
         socket.emit('new pin', {
             pin: {
                 id: pin.getId(),
-                diagEndpoints: pin.getDiagEndpoints()
+                geometry: pin.getGeometry()
             },
             user: pin.getUser().getColor()
         });

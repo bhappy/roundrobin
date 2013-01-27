@@ -1,7 +1,7 @@
-<div id="pin_{{pin.id}}" class="pin" style="left:{{pin.upper.[0]}}px; top:{{pin.upper.[1]}}px; width:{{pin.lower.[0]-pin.upper.[0]}}px;">
+<div id="pin_{{pin.id}}" class="pin" style="left:{{pin.left}}px; top:{{pin.top}}px; height:{{pin.height}}px; width:{{pin.width}}px;">
     <header id="pinHeader_{{pin.id}}" class="pinHeader">
         <span style="color:{{user.color}};">
-            ({{pin.upper.[0]}},{{pin.upper.[1]}}) ({{pin.lower.[0]}},{{pin.lower.[1]}})
+            (left:{{pin.left}}, top:{{pin.top}}, height:{{pin.height}}, width:{{pin.width}})
         </span>
     </header>
     <div id="pinBody_{{pin.id}}" class="pinBody">

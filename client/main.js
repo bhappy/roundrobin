@@ -17,16 +17,21 @@ $(document).ready(function () {
     
     // handle the creation of a new pin, as specified on the socket
     socket.on('new pin', function (config) {
-        var pin, upper, lower;
+        var pin, left, top, height, width;
         var pinId = config.pin.id;
         var color = config.user;
         pin = RR.pinMap[pinId] = new RRPin(config.pin);
-        upper = pin.getDiagEndpoints().upper;
-        lower = pin.getDiagEndpoints().lower;
+        left   = pin.getGeometry().left;
+        top    = pin.getGeometry().top;
+        height = pin.getGeometry().height;
+        width  = pin.getGeometry().width;
         $('#selectArea').append(Handlebars.templates['pin']({
-            pin:  { id: pinId, lower: lower, upper: upper },
+            pin:  { id: pinId, left: left, top: top, height: height, width: width },
             user: { color: color }
         }));
+        $('#pinBody_' + pinId).height($('#pin_' + pinId).height() - 
+                ($('#pinHeader_' + pinId).outerHeight() + $('#pinBody_' + pinId).outerHeight() +
+                $('#pinFooter_' + pinId).outerHeight()));
         var sendComment = (function (id) {
             return function () {
                 RRComment.sendNew({ pin: id, text: $('#commentInput_' + id).val() });
@@ -70,10 +75,12 @@ $(document).ready(function () {
         }
     });
 
-    $('#sendDiagEndpoints').on('click', function () {
+    $('#sendGeometry').on('click', function () {
         RRPin.sendNew({
-            upper: [ $('#upperXAdd').val(), $('#upperYAdd').val() ],
-            lower: [ $('#lowerXAdd').val(), $('#lowerYAdd').val() ]
+            left:   $('#geometryLeftAdd').val(),
+            top:    $('#geometryTopAdd').val(),
+            height: $('#geometryHeightAdd').val(),
+            width:  $('#geometryWidthAdd').val()
         });
     });
 });
