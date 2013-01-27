@@ -32,4 +32,6 @@
     filter: alpha(opacity=80);
     font-weight: bold;
     padding: 7px;
+    overflow-x: hidden;
+    overflow-y: scroll;
 }

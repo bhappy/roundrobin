@@ -48,18 +48,20 @@ $(document).ready(function () {
         });
     });
 
-    // handle the creation of a new comment, as specified on the socket
+    // handle the creation of a new comment, as specified on the socket.
+    // comments are inserted in reverse chronological order.
     socket.on('new comment', function (config) {
-        var comment, commentText;
+        var comment, commentText = config.comment.text;
         var commentId = config.comment.id;
         var pinId = config.pin;
         var color = config.user;
-        commentText = config.comment.text;
-        comment = RR.commentMap[commentId] = new RRComment(config.comment);
-        $('#pinBody_' + pinId).append(Handlebars.templates['comment']({
+        RR.commentMap[commentId] = new RRComment(config.comment);
+
+        // create the comment from a template and fade it into the first position of the pin
+        $(Handlebars.templates['comment']({
             comment: { id: commentId, text: commentText },
             user: { color: color }
-        }));
+        })).hide().prependTo($('#pinBody_' + pinId)).fadeIn();
     });
 
     // handle sending the user name
