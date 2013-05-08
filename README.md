@@ -1,5 +1,5 @@
-Round Robin - Real-Time On-Page Collaboration
-=============================================
+Round Robin - Realtime Inpage Brainstorming
+===========================================
 
 Description
 -----------
